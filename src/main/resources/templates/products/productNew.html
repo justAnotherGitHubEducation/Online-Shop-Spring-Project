@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+
+<!--<form th:action="@{/items/{id}/new(id=*{sale_id})}" th:object="${item}" method="post" >-->
+
+<!--<input type="text" name="saleId" id="saleId"  th:object="${sale_id}" >-->
+<!--<input type="text"  th:value="${sale_id}"/>-->
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+<form th:action="@{/products/new}" th:object="${product}" method="post" >
+
+    <table>
+        <caption>Добавить продукт</caption>
+        <tr>
+            <th>Name: </th>
+            <td>
+                <input type="text" th:field="*{name}"/>
+            </td>
+
+        </tr>
+        <tr>
+            <th>Description: </th>
+            <td>
+                <input type="text" th:field="*{description}"/>
+            </td>
+
+        </tr>
+    </table>
+    <tr>
+        <div><button type="submit" >  Save</button> </div>
+    </tr>
+
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </ul>
+    </div>
+</form>
+</body>
+</html>

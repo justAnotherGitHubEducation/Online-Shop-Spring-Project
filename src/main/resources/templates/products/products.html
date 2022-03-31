@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Sale Management System</title>
+</head>
+<body>
+
+
+
+<header th:insert="general.html :: header"> </header>
+
+<a href="/sales" >Sales list</a>
+
+<br>
+<div >
+    <table >
+        <caption>
+            <h1>
+                Products List
+            </h1>
+        </caption>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description </th>
+            <th>Operations </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td> <a th:href="@{/products/{id}/update(id=${product.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/products/{id}/delete(id=${product.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href = "/products/new">
+        <button type="button">Add</button>
+    </a><br>
+
+
+</div>
+</body>
+
+</html>

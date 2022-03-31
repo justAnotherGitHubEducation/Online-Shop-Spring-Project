@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+
+Edit User
+
+<form th:action="@{/users/{id}/update(id=*{id})}" th:object="${user}" method="post">
+    <div><label> User Name : <input type="text" th:field="*{username}"/> </label>
+
+    </div>
+
+    <div><label> Password: <input type="password" th:field="*{password}"/> </label>
+
+    </div>
+
+    <div><label for="birthday">
+        Birthday:
+        <input type="date" th:field="*{birthday}" id="birthday">
+
+    </label></div>
+
+    <div><label for="email">
+        Email:
+        <input type="text" th:field="*{email}" id="email">
+
+    </label></div>
+
+    <div ><label for="active">
+        Active:
+        <input type="checkbox" th:field="*{active}" id="active">
+    </label></div>
+
+    <p>
+        <label>Roles:
+            <input type="checkbox" name="roles"
+                   th:each="role : ${roles}"
+                   th:text="${role}"
+                   th:value="${role}"
+                   th:field="*{roles}"
+            />
+        </label>
+    </p>
+
+    <div><button type="submit">Save</button> </div>
+
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </ul>
+    </div>
+
+</form>
+
+</body>
+</html>

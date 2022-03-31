@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+
+<form th:action="@{/items/new}" th:object="${item}" method="post" >
+
+    <table>
+        <caption>Добавить позицию</caption>
+        <tr>
+            <th>Product: </th>
+            <td>
+                <select th:field="${item.product_id}">
+                    <option value="" th:if="${item.product_id == null}"> --</option>
+                    <option th:value="${item.product_id}"
+                            th:utext="${item.productName}"
+                            th:if="${item.product_id != null}"/>
+                    <option th:each="product : ${products}"
+                            th:value="${product.id}"
+                            th:utext="${product.name}" th:if="${item.product_id == null}"/>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Comment: </th>
+            <td>
+                <input type="text" th:field="*{comment}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>Quantity: </th>
+            <td>
+                <input type="text" th:field="*{quantity}" id="quantity">
+            </td>
+        </tr>
+
+        <input hidden = "hidden" type="text" th:field="*{sale_id}" id="sale_id">
+
+    </table>
+    <tr>
+        <div><button type="submit" >  Save</button> </div>
+    </tr>
+
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </ul>
+    </div>
+</form>
+</body>
+</html>

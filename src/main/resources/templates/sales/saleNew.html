@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example </title>
+</head>
+<body>
+
+<form th:action="@{/sales/new}" th:object="${sale}" method="post" >
+
+    <table>
+            <caption th:if="${sale.id == null}">Добавить продажу</caption>
+
+        <tr>
+            <th>User: </th>
+
+            <td>
+                <select th:field="${sale.user_id}">
+                    <option value="" th:if="${sale.user_id == null}"> --</option>
+                    <option th:value="${sale.user_id}"
+                            th:utext="${sale.username}"
+                            th:if="${sale.user_id != null}"/>
+                    <option th:each="user : ${users}"
+                            th:value="${user.id}"
+                            th:utext="${user.username}" th:if="${sale.user_id == null}"/>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Description: </th>
+            <td>
+                <input type="text" th:field="*{description}"/>
+            </td>
+        </tr>
+        <tr>
+            <th>Date: </th>
+            <td>
+                <input type="date" th:field="*{date}" id="date">
+            </td>
+        </tr>
+    </table>
+    <tr>
+
+    <div><button type="submit" th:if="${sale.id == null}">  Save</button> </div>
+    <div><button type="submit" th:unless="${sale.id == null}">  Edit</button> </div>
+
+    </tr>
+
+    <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+            <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </ul>
+    </div>
+
+</form>
+</body>
+</html>
