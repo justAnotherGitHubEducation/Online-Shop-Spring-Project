@@ -8,8 +8,8 @@
 5. Gradle
 6. JUnit
 7. Mockito
-8. Thymeleaf
-9. Postgres
+8. AssertJ
+9. Thymeleaf
 10. Hibernate
 11. Mapstrukt
 12. PostgreSQL
