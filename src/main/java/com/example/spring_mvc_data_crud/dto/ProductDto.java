@@ -10,11 +10,8 @@ import javax.validation.constraints.NotBlank;
 public class ProductDto {
 
     private Long id;
-
     @NotBlank(message = "name is empty")
     private String name;
-
     @NotBlank(message = "description is empty")
     private String description;
-
 }

@@ -10,7 +10,6 @@ public enum Role implements GrantedAuthority {
     USER;
 
     public static Optional<Role> find(String gender) {
-
         return Arrays.stream(values()).filter(it -> it.name().equals(gender))
                 .findFirst();
     }

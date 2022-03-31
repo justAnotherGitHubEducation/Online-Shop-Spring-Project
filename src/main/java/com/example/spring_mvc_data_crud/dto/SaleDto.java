@@ -16,14 +16,9 @@ public class SaleDto {
 
    private Long id;
    private LocalDate date;
-
    @NotNull(message = "User is empty")
    private Long user_id;
    private String username;
-
    @NotBlank(message = "description is empty")
   private String description;
-
-
-
 }

@@ -15,30 +15,25 @@ import java.util.List;
 @Service
 @Transactional
 public class SaleService {
-
     private final SaleMapper saleMapper;
     private final SaleRepo saleRepo;
 
     public List<Sale> findAll() {
-
         return saleRepo.findAll();
     }
 
     public boolean addSale(Sale sale) {
-
         saleRepo.save(sale);
         return true;
     }
 
     public Sale update(Sale sale,Long id ) {
-
         return saleRepo.findById(id)
                 .map(saleid -> {
                     saleid.setId(sale.getId());
                     saleid.setDescription(sale.getDescription());
                     saleid.setUser(sale.getUser());
                     saleid.setDate(sale.getDate());
-                   // saleid.setItems(sale.getItems());
                     saleRepo.save(saleid);
                     return saleid;
                      })
@@ -47,7 +42,6 @@ public class SaleService {
     }
 
     public Sale findSaleById(Long id) {
-
         return saleRepo.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Sale not found( id "+ id+")"));
     }

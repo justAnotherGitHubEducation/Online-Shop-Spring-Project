@@ -35,7 +35,6 @@ public class User  implements UserDetails{
     @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE})
     private List<Sale> sales;
 
-
     @Email
     private String email;
 

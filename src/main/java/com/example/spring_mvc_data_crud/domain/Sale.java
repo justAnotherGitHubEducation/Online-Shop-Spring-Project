@@ -22,14 +22,10 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private LocalDate date;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
     private String description;
-
-
     @OneToMany(mappedBy = "sale", cascade = {CascadeType.REMOVE})
     private List<Item> items;
 

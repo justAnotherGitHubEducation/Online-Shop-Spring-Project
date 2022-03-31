@@ -32,10 +32,8 @@ public class SaleController {
     private final UserMapper userMapper;
     private final SaleMapper saleMapper;
 
-
     @GetMapping()
     String getSalesList(Model model) {
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User CurrentUser = (User) userService.loadUserByUsername(auth.getName());
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN")))
@@ -49,39 +47,28 @@ public class SaleController {
 
     @GetMapping("/new")
     public String saleCreate(Model model, SaleDto saleDto) {
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN")))
             model.addAttribute("users", userService.findAll().stream().map(user -> userMapper.userToUserDto(user)).collect(Collectors.toList()));
         else if (auth != null)
             model.addAttribute("users", userMapper.userToUserDto((User) userService.loadUserByUsername(auth.getName())));
-
-
         model.addAttribute("sale", saleDto);
-
         return "sales/saleNew";
-
     }
 
     @GetMapping("/{id}/update")
     public String saleUpdate(Model model, @PathVariable Long id) {
-
         model.addAttribute("sale", saleMapper.saleToSaleDto(saleService.findSaleById(id)));
         return "sales/saleUpdate";
-
     }
 
     @PostMapping("/new")
     public String createSale(@ModelAttribute("sale") @Valid SaleDto saleDto, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
-
             Map<String, String> errors = ValidateUtils.getErrors(bindingResult);
             model.addAttribute("errors", errors);
             return "sales/saleNew";
-
         } else {
-
             saleService.addSale(saleMapper.saleDtoToSale(saleDto));
             return "redirect:/sales";
         }
@@ -89,15 +76,11 @@ public class SaleController {
 
     @PostMapping("/{id}/update")
     public String updateSale(@ModelAttribute("sale") @Valid SaleDto saleDto, @PathVariable Long id, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
-
             Map<String, String> errors = ValidateUtils.getErrors(bindingResult);
             model.addAttribute("errors", errors);
             return "sales/saleUpdate";
-
         } else {
-
             saleService.update(saleMapper.saleDtoToSale(saleDto), id);
             return "redirect:/sales";
         }

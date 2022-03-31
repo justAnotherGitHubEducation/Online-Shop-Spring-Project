@@ -32,10 +32,8 @@ public class ProductController {
     private final ProductMapper productMapper;
     private final SaleMapper saleMapper;
 
-
     @GetMapping()
     String getSalesList(Model model){
-
         model.addAttribute("products",
                 productService.findAll().stream().map(product -> productMapper.ProductToProductDto(product)).collect(toList()));
         return "products/products";
@@ -43,14 +41,12 @@ public class ProductController {
 
     @GetMapping("/new")
     public String ProductCreate(Model model, ProductDto productDto){
-
         model.addAttribute("product", productDto);
         return "products/productNew";
     }
 
     @GetMapping("/{id}/update")
     public String ProductUpdate(Model model,@PathVariable Long id){
-
         model.addAttribute("product",productMapper.ProductToProductDto(productService.findById(id))) ;
         return "products/productUpdate";
 
@@ -58,13 +54,10 @@ public class ProductController {
 
     @PostMapping("/new")
     public String createProduct(@ModelAttribute("product")  @Valid ProductDto productDto, BindingResult bindingResult, Model model){
-
         if (bindingResult.hasErrors()) {
-
             Map<String, String> errors = ValidateUtils.getErrors(bindingResult);
             model.addAttribute("errors",errors);
             return "products/productNew";
-
         }
         else {
 
@@ -75,16 +68,12 @@ public class ProductController {
 
     @PostMapping("/{id}/update")
     public String updateProduct(@ModelAttribute("product") @Valid ProductDto productDto, @PathVariable Long id, BindingResult bindingResult, Model model){
-
         if (bindingResult.hasErrors()) {
-
             Map<String, String> errors = ValidateUtils.getErrors(bindingResult);
             model.addAttribute("errors",errors);
             return "products/productUpdate";
-
         }
         else {
-
             productService.update(productMapper.ProductDtoToProduct(productDto),id);
             return "redirect:/products";
         }

@@ -15,18 +15,12 @@ import java.util.Set;
 public class UserDto {
 
     private Long id;
-
     @NotBlank(message = "Username is empty")
     private String username;
-
     private String password;
-
     private boolean active;
     private LocalDate birthday;
-
     @Email
     private String email;
-
     private Set<String> roles;
-
 }

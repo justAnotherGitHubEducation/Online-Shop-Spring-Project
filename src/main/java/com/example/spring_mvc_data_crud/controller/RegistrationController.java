@@ -28,14 +28,12 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String registration(Model model) {
-
         model.addAttribute("user", new UserDto());
         return "registration";
     }
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("user") UserDto userDto, Model model) {
-
         User userFromDb = (User) userService.loadUserByUsername(userDto.getUsername());
         if (userFromDb != null) {
             model.addAttribute("message", "User exists!");

@@ -14,7 +14,6 @@ import org.mapstruct.Mapping;
 public interface ProductMapper {
 
     Product ProductDtoToProduct(ProductDto productDto);
-
     @Mapping(source = "product.id",target = "id")
     ProductDto ProductToProductDto(Product product);
 

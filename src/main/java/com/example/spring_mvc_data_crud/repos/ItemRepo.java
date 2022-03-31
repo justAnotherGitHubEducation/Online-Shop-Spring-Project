@@ -8,6 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemRepo extends JpaRepository<Item, Long> {
-
     List<Item> findAllBySale_Id(Long id);
 }

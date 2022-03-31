@@ -29,13 +29,11 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         Optional<User> user = userRepo.findByUsername(username);
         return user.orElse(null);
     }
 
     public boolean addUser( User user) {
-
         Optional<User> userFromDB = userRepo.findByUsername(user.getUsername());
         if (userFromDB.isPresent()){
 
@@ -45,17 +43,14 @@ public class UserService implements UserDetailsService {
         user.setRoles(Collections.singleton(Role.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
-
         return true;
     }
 
     public List<User> findAll() {
-
         return userRepo.findAll();
     }
 
     public User update(User user,Long id ) {
-
         return userRepo.findById(id)
                 .map(userid -> {
                             userid.setUsername(user.getUsername());
@@ -74,7 +69,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User findById(Long id){
-
         return userRepo.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("User not found( id "+ id+")"));
     }

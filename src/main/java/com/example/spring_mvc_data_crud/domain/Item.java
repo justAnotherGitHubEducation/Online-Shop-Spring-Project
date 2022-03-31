@@ -17,12 +17,10 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @OneToOne()
     private Product product;
     private String comment;
     private Integer quantity;
-
     @ManyToOne
     @JoinColumn(name="sale_id", nullable=false)
     private Sale sale;

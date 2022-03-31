@@ -13,13 +13,10 @@ import javax.validation.constraints.NotNull;
 public class ItemDto {
 
     Long id;
-
     @NotNull(message = "product is empty")
     Long product_id;
     String productName;
-
     String comment;
-
     @NotNull(message = "quantity is empty")
     Integer quantity;
     Long sale_id;

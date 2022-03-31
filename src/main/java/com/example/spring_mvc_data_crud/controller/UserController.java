@@ -31,14 +31,12 @@ public class UserController {
 
     @GetMapping()
     String getUserList(Model model){
-
         model.addAttribute("listUsers", userService.findAll().stream().map(user -> userMapper.userToUserDto(user)).collect(Collectors.toList()));
         return "users/users";
     }
 
     @GetMapping("/new")
     public String userCreate(Model model){
-
         model.addAttribute("user", new User());
         return "users/userNew";
 
@@ -46,19 +44,14 @@ public class UserController {
 
     @GetMapping("/{id}/update")
     public String getUserById(Model model,@PathVariable Long id){
-
         model.addAttribute("user",userMapper.userToUserDto(userService.findById(id)));
         model.addAttribute("roles", Role.values());
-
         return "users/userUpdate";
-
     }
 
     @PostMapping("/new")
     public String createUser(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult, Model model){
-
         if (bindingResult.hasErrors()) {
-
             Map<String, String> errors = ValidateUtils.getErrors(bindingResult);
             model.addAttribute("errors",errors);
             return "users/userNew";
@@ -71,16 +64,12 @@ public class UserController {
 
     @PostMapping("/{id}/update")
     public String updateUser(@ModelAttribute("user") @Valid UserDto userDto,@PathVariable Long id, BindingResult bindingResult, Model model){
-
         if (bindingResult.hasErrors()) {
-
             Map<String, String> errors = ValidateUtils.getErrors(bindingResult);
             model.addAttribute("errors",errors);
             return "users/userUpdate";
-
         }
         else {
-
             userService.update(userMapper.userDtoToUser(userDto),id);
             return "redirect:/users";
         }

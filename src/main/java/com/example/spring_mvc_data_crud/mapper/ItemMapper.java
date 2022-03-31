@@ -10,12 +10,8 @@ import com.example.spring_mvc_data_crud.service.UserService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-
-
 @Mapper(componentModel = "spring", uses = {SaleService.class, ProductService.class})
 public interface ItemMapper {
-
-
     @Mapping(source = "itemDto.product_id",target = " product.id")
     @Mapping(source = "itemDto.sale_id",target = "sale.id")
     Item ItemDtoToItem(ItemDto itemDto);

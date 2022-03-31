@@ -13,42 +13,35 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ItemService   {
-
-   private final ItemRepo itemRepo;
+public class ItemService {
+    private final ItemRepo itemRepo;
 
     public List<Item> findAllBySaleId(Long id) {
-
         return itemRepo.findAllBySale_Id(id);
     }
 
     public boolean addItem(Item item) {
-
         itemRepo.save(item);
         return true;
     }
 
-    public Item findById(Long id){
-
+    public Item findById(Long id) {
         return itemRepo.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Item not found( id "+ id+")"));
+                .orElseThrow(() -> new ObjectNotFoundException("Item not found( id " + id + ")"));
     }
 
-    public Item update(Item item,Long id ) {
-
+    public Item update(Item item, Long id) {
         return itemRepo.findById(id)
                 .map(ItemRepo -> {
-
                     ItemRepo.setId(item.getId());
                     ItemRepo.setComment(item.getComment());
                     ItemRepo.setProduct(item.getProduct());
                     ItemRepo.setSale(item.getSale());
                     ItemRepo.setQuantity(item.getQuantity());
-
                     itemRepo.save(ItemRepo);
                     return ItemRepo;
                 })
-                .orElseThrow(() -> new ObjectNotFoundException("Item not found( id "+ id+")"));
+                .orElseThrow(() -> new ObjectNotFoundException("Item not found( id " + id + ")"));
     }
 
     public void deleteItem(Long id) {

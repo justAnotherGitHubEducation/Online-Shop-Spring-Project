@@ -21,7 +21,6 @@ public interface SaleMapper {
     @Mapping(target = "items",ignore = true)
     Sale saleDtoToSale(SaleDto saleDto);
 
-
     @Mapping(source = "sale.user.id",target = "user_id")
     @Mapping(source = "sale.user.username",target = "username")
     SaleDto saleToSaleDto(Sale sale);
